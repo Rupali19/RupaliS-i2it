@@ -1,0 +1,689 @@
+{
+  "intents": [
+    {
+      "intent": "timings",
+      "examples": [
+        {
+          "text": "what are the store hours"
+        },
+        {
+          "text": "what are the timings"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thanks",
+      "examples": [
+        {
+          "text": "thank you"
+        },
+        {
+          "text": "bye"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "faqs",
+      "examples": [
+        {
+          "text": "how to set timer"
+        },
+        {
+          "text": "how to on heater"
+        },
+        {
+          "text": "how to access settings"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "good afternoon"
+        },
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "good evening"
+        },
+        {
+          "text": "welcome"
+        },
+        {
+          "text": "hello"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "what is exchange policy"
+        },
+        {
+          "text": "list of items"
+        },
+        {
+          "text": "what are the offers"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "How can i get there"
+        },
+        {
+          "text": "Where is your store located?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "time",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "weekdays",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "weekends",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "faq",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "th",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "thank you",
+          "synonyms": [
+            "thank u",
+            "thanks",
+            "thnk u"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "bye",
+          "synonyms": [
+            "by",
+            "nice to see you"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "loc",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "texas",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "california",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "enq",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "list",
+          "synonyms": [
+            "products"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "offer",
+          "synonyms": [
+            "discount",
+            "off"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greet",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "gm"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good afternoon",
+          "synonyms": [
+            "noon"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "hello",
+          "synonyms": [
+            "hi",
+            "hey"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good evening",
+          "synonyms": [
+            "evening"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.appdomain.cloud/api/v1/web/rupashivpure%40gmail.com_dev/default/code.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "try again "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1597671719173",
+      "conditions": "anything_else",
+      "dialog_node": "response_4_1597672758682",
+      "previous_sibling": "response_8_1597672756037"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?context.webhook_result_1.passages.get(0).get(\"passage_text\").getAsString() ?>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1597671719173",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_8_1597672756037"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "9am to 12pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597667248169",
+      "conditions": "@time:weekends",
+      "dialog_node": "response_5_1597667303169",
+      "previous_sibling": "response_6_1597667274606"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "weekdays: 10am to 7pm , weekends: 9am to 12pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597667248169",
+      "conditions": "anything_else",
+      "dialog_node": "response_1_1597667336542",
+      "previous_sibling": "response_5_1597667303169"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "10 am to 7pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597667248169",
+      "conditions": "@time:weekdays",
+      "dialog_node": "response_6_1597667274606"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Our store is located at texas and california"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1597666939106",
+      "conditions": "anything_else",
+      "dialog_node": "response_7_1597667068964",
+      "previous_sibling": "response_6_1597667029200"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "take a local train to california station to find us there"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1597666939106",
+      "conditions": "@loc:california",
+      "dialog_node": "response_6_1597667029200",
+      "previous_sibling": "response_3_1597666971651"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "take a cab to down street, you will find us at the first corner"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1597666939106",
+      "conditions": "@loc:texas",
+      "dialog_node": "response_3_1597666971651"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "source": "https://7esl.com/wp-content/uploads/2018/02/Technological-gadgets-vocabulary-in-English-1.jpg",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_7_1597667841904",
+      "conditions": "@enq:list",
+      "dialog_node": "response_3_1597667895912",
+      "previous_sibling": "response_1_1597667867242"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "call : 2448963"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597667841904",
+      "conditions": "anything_else",
+      "dialog_node": "response_7_1597667979361",
+      "previous_sibling": "response_3_1597667895912"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "30% off"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597667841904",
+      "conditions": "@enq:offer",
+      "dialog_node": "response_1_1597667867242"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A very good morning"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597666392171",
+      "conditions": "@greet:(good morning)",
+      "dialog_node": "response_6_1597666502858",
+      "previous_sibling": "response_3_1597666470600"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi, good afternoon"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597666392171",
+      "conditions": "@greet:(good afternoon)",
+      "dialog_node": "response_9_1597666530964",
+      "previous_sibling": "response_6_1597666502858"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "hi, its almost tea time, how can i help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597666392171",
+      "conditions": "@greet:(good evening)",
+      "dialog_node": "response_3_1597666569271",
+      "previous_sibling": "response_9_1597666530964"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Cant get you!, ellaborate please"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597666392171",
+      "conditions": "anything_else",
+      "dialog_node": "response_6_1597666615340",
+      "previous_sibling": "response_3_1597666569271"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hey there!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597666392171",
+      "conditions": "@greet:hello",
+      "dialog_node": "response_3_1597666470600"
+    },
+    {
+      "type": "standard",
+      "title": "FAQ",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<? input.text ?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#faqs",
+      "dialog_node": "node_2_1597671719173",
+      "previous_sibling": "node_10_1597668220909"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1597671719173",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry",
+      "dialog_node": "node_7_1597667841904",
+      "previous_sibling": "node_7_1597667248169"
+    },
+    {
+      "type": "standard",
+      "title": "timing",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#timings",
+      "dialog_node": "node_7_1597667248169",
+      "previous_sibling": "node_9_1597666939106"
+    },
+    {
+      "type": "standard",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings || @greet",
+      "dialog_node": "node_5_1597666392171",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "thanks",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you! See you at the store!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#thanks && @th",
+      "dialog_node": "node_10_1597668220909",
+      "previous_sibling": "node_7_1597667841904"
+    },
+    {
+      "type": "standard",
+      "title": "location",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#location",
+      "dialog_node": "node_9_1597666939106",
+      "previous_sibling": "node_5_1597666392171"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. Welcome to our store, how can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Customer-Help",
+  "language": "en",
+  "description": ""
+}
